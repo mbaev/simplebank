@@ -1,9 +1,14 @@
 -- name: GetAccount :one
-SELECT * FROM accounts
-WHERE id = $1 LIMIT 1;
+SELECT *
+FROM accounts
+WHERE id = $1
+LIMIT 1;
 
 -- name: ListAccounts :many
-SELECT * FROM accounts order by id limit $1 offset $2;
+SELECT *
+FROM accounts
+order by id
+limit $1 offset $2;
 
 -- name: CreateAccount :one
 INSERT INTO accounts (owner, balance, currency)
@@ -17,5 +22,6 @@ WHERE id = $1
 RETURNING *;
 
 -- name: DeleteAccount :exec
-DELETE FROM accounts
+DELETE
+FROM accounts
 WHERE id = $1;
