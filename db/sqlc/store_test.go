@@ -16,7 +16,7 @@ func TestStore_TransferTx(t *testing.T) {
 	errs := make(chan error)
 	results := make(chan TransferTxResult)
 
-	n := 6
+	n := 50
 	amount := int64(10)
 	for i := 0; i < n; i++ {
 		go func() {
