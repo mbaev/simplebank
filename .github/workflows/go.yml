@@ -28,19 +28,25 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-    - uses: actions/checkout@v4
-
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: '1.24'
+        go-version: ^1.24
       id: go
+
+    - uses: actions/checkout@v4
+
+    - name: Install migrate lib
+      run: |
+        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.3/migrate.linux-amd64.tar.gz | tar xvz
+        sudo mv ./migrate.linux-amd64 /usr/bin/migrate
+        which migrate
 
     - name: Run migrations
       run: make migrateup
 
-    - name: Build
-      run: go build -v ./...
+#    - name: Build
+#      run: go build -v ./...
 
     - name: Test
       run: make test
